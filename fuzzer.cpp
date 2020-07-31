@@ -25,7 +25,7 @@ void detect_bugs(){
     int no=0;
     int flag=0;
     char ch;
-    ifstream f("result");
+    ifstream f("result.txt");
     while(f.get(ch)) s+=ch;
     //check out of bound error
     int a=s.find("Invalid read of size");
@@ -146,7 +146,7 @@ int main(int argc, char *argv[]){
             else variation_replace(filename);
 
             //fuzzing
-            string fuzzing_cmd="valgrind --tool=memcheck --leak-check=full --log-file=\"result\" ./test "+filename;
+            string fuzzing_cmd="valgrind --tool=memcheck --leak-check=full --log-file=\"result.txt\" ./test "+filename;
             system(fuzzing_cmd.c_str());
             cout<<"  result:  ";
             detect_bugs();
